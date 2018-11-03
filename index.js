@@ -1,9 +1,13 @@
+//bring in tensorflow, results interface, and MNIST batches from data.js
 import * as tf from '@tensorflow/tfjs';
 import { MnistData } from './data';
 import * as ui from './ui';
 
+//in a sequential model the outputs of the previous layer are used as the inputs for the following layer
 const model = tf.sequential();
 
+//here we use a convolutional 2D layer and define the input shape
+//the activation function is 
 model.add(tf.layers.conv2d({
   inputShape: [28, 28, 1],
   kernelSize: 5,
@@ -12,7 +16,10 @@ model.add(tf.layers.conv2d({
   activation: 'relu',
   kernelInitializer: 'varianceScaling'
 }));
-model.add(tf.layers.maxPooling2d({poolSize: [2, 2], strides: [2, 2]}));
+model.add(tf.layers.maxPooling2d({
+  poolSize: [2, 2], 
+  strides: [2, 2]
+}));
 
 model.add(tf.layers.conv2d({
   kernelSize: 5,
@@ -21,11 +28,17 @@ model.add(tf.layers.conv2d({
   activation: 'relu',
   kernelInitializer: 'varianceScaling'
 }));
-model.add(tf.layers.maxPooling2d({poolSize: [2, 2], strides: [2, 2]}));
+model.add(tf.layers.maxPooling2d({
+  poolSize: [2, 2], 
+  strides: [2, 2]
+}));
 
 model.add(tf.layers.flatten());
-model.add(tf.layers.dense(
-    {units: 10, kernelInitializer: 'varianceScaling', activation: 'softmax'}));
+model.add(tf.layers.dense({
+    units: 10, 
+    kernelInitializer: 'varianceScaling', 
+    activation: 'softmax'
+  }));
 
 const LEARNING_RATE = 0.15;
 const optimizer = tf.train.sgd(LEARNING_RATE);
