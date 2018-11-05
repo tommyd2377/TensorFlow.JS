@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>TensorFlow.js</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.cyan-teal.min.css">
-    <link rel="icon" href="e1dd4909048bbb43028c0d800ae15ed0.png">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.cyan-teal.min.css" />
+    <link rel="icon" href="../Images/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" media="screen" href="15782631ccf6f42bdbf06e346671b4f6.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="../CSS/main.css" />
    
 </head>
 <body>
     <div class="header">
-        <img src="5a96dbda0a3147600cf69b745ceea4be.png" alt="">
+        <img src="../Images/tflogo.png" alt="">
           <h5>
               A JavaScript library for training and 
               deploying ML models in <br> the browser and on Node.js
@@ -23,18 +23,21 @@
       
       <div id="navbar">
         <a class="active" href="#">Example</a>
-        <a href="15cd99dda5cdc2e23d1e9fc615d69471.html">About</a>
-        <a href="f16588705d1fe72c1b18576bef649e78.html">Videos</a>
+        <a href="../Pages/about.html">About</a>
+        <a href="../Pages/videos.html">Videos</a>
 
       </div>
       
       <div id="content">
-        <h5>Below is a live example of TensorFlow JS training(learning) how to read hand written digits
-          using the open-source MNIST data set. Training the neural network all takes place right in
-          the index.js file, with the data.js providing the training data from MNIST one batch at a time. 
+        <h5>Here is TensorFlow.js in action! When the system finished training on the open-source MNIST data set the it will be able to classify
+           hand written digits. Training the neural network all takes place right in browser.
+          Within the source code, the training and testing are executed in index.js, while data.js fetches the training and testing data from MNIST one batch at a time. 
           When a certain level of accuracy is reached the training is stopped and the last test batch is displayed.
         </h5>
-  
+
+        <a href="https://github.com/tommyd2377/TensorFlowJS">GitHub</a>
+        <br>
+        <br>
         <div id="status">Loading data...</div>
         <div id="message"></div>
   
@@ -51,6 +54,6 @@
   
         <div id="images"></div>
       </div>
-      <script src="tfjs-examples-mnist.js"></script>
+      <script src="../index.js"></script>
     </body>
 </html>
