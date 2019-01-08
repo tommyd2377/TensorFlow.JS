@@ -1,4 +1,4 @@
-//bring in tensorflow, results interface, and MNIST batches from data.js
+//bring in tensorflow, the results interface, and MNIST batches from data.js
 import * as tf from '@tensorflow/tfjs';
 import { MnistData } from './data';
 import * as ui from './ui';
@@ -7,7 +7,7 @@ import * as ui from './ui';
 const model = tf.sequential();
 
 //here we use a convolutional 2D layer and define the input shape
-//the activation function is 
+//the activation function we're going to use is known as a rectified linear unit
 model.add(tf.layers.conv2d({
   inputShape: [28, 28, 1],
   kernelSize: 5,
@@ -21,6 +21,7 @@ model.add(tf.layers.maxPooling2d({
   strides: [2, 2]
 }));
 
+//we will configure the second layer the same as the input layer
 model.add(tf.layers.conv2d({
   kernelSize: 5,
   filters: 16,
@@ -33,6 +34,7 @@ model.add(tf.layers.maxPooling2d({
   strides: [2, 2]
 }));
 
+//the final layer will flatten out the data and use the softmax activation function
 model.add(tf.layers.flatten());
 model.add(tf.layers.dense({
     units: 10, 
@@ -40,6 +42,7 @@ model.add(tf.layers.dense({
     activation: 'softmax'
   }));
 
+//in this example we are going to use stochastic gradient descent as the optimizer function
 const LEARNING_RATE = 0.15;
 const optimizer = tf.train.sgd(LEARNING_RATE);
 model.compile({
@@ -51,11 +54,11 @@ model.compile({
 const BATCH_SIZE = 64;
 const TRAIN_BATCHES = 150;
 
-// Every few batches, test accuracy over many examples. Ideally, we'd compute
-// accuracy over the whole test set, but for performance we'll use a subset.
+//every few batches, test the accuracy over many examples
 const TEST_BATCH_SIZE = 1000;
 const TEST_ITERATION_FREQUENCY = 5;
 
+//begin training with the model configuration defined above
 async function train() {
   ui.isTraining();
 
@@ -67,7 +70,7 @@ async function train() {
 
     let testBatch;
     let validationData;
-    // Every few batches test the accuracy of the mode.
+    //est the accuracy of the mode every few batches
     if (i % TEST_ITERATION_FREQUENCY === 0) {
       testBatch = data.nextTestBatch(TEST_BATCH_SIZE);
       validationData = [
@@ -75,8 +78,7 @@ async function train() {
       ];
     }
 
-    // The entire dataset doesn't fit into memory so we call fit repeatedly
-    // with batches.
+    //because the dataset is too large for memory we'll call fit repeadedly
     const history = await model.fit(
         batch.xs.reshape([BATCH_SIZE, 28, 28, 1]), batch.labels,
         {batchSize: BATCH_SIZE, validationData, epochs: 1});
@@ -84,7 +86,7 @@ async function train() {
     const loss = history.history.loss[0];
     const accuracy = history.history.acc[0];
 
-    // Plot loss / accuracy.
+    //plot the loss and accuracy
     lossValues.push({'batch': i, 'loss': loss, 'set': 'train'});
     ui.plotLosses(lossValues);
 
