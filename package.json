@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@tensorflow/tfjs": "0.11.2",
-    "vega-embed": "~3.0.0"
+    "vega-embed": "~3.30.0"
   },
   "scripts": {
     "watch": "NODE_ENV=development parcel --no-hmr --open index.html ",
